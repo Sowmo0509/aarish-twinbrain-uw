@@ -1,6 +1,6 @@
 import { atom } from "recoil";
 
-const textState = atom({
-  key: "textState",
-  default: "",
+export const recordANoteState = atom({
+  key: "recordANoteState",
+  default: false,
 });

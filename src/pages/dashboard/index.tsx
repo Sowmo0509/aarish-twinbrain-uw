@@ -6,6 +6,8 @@ import { useState } from "react";
 import { CHIPS } from "@/data/const";
 import AskMyAi from "@/components/AskMyAi/AskMyAi";
 import RecordANote from "@/components/RecordANote/RecordANote";
+import { useRecoilState } from "recoil";
+import { recordANoteState } from "@/libs/atoms";
 
 const Autocomplete = styled(MantineAutocomplete)`
   input {
@@ -17,6 +19,8 @@ const Autocomplete = styled(MantineAutocomplete)`
 `;
 
 const Dashboard = () => {
+  const [isRecording, setIsRecording] = useRecoilState(recordANoteState);
+
   return (
     <DashboardLayout>
       <Flex direction={"column"} justify={"center"} align={"center"}>
@@ -37,11 +41,13 @@ const Dashboard = () => {
           <Box>
             <Group gap={8} bg={"white"} px={14} py={8} className="rounded-2xl shadow-lg">
               <RecordANote />
-              <AskMyAi />
+              {!isRecording && <AskMyAi />}
 
-              <Button radius={"lg"} variant="light" size="sm" fz={"md"} fw={500} rightSection={<IconPlus width={20} height={20} />}>
-                Add New
-              </Button>
+              {!isRecording && (
+                <Button radius={"lg"} variant="light" size="sm" fz={"md"} fw={500} rightSection={<IconPlus width={20} height={20} />}>
+                  Add New
+                </Button>
+              )}
             </Group>
           </Box>
         </Box>
