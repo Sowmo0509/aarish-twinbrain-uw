@@ -4,10 +4,11 @@ import { Autocomplete as MantineAutocomplete, Flex, rem, Chip, Group, Stack, But
 import { IconGradienter, IconPlus, IconSearch } from "@tabler/icons-react";
 import { useState } from "react";
 import { CHIPS } from "@/data/const";
-import AskMyAi from "@/components/AskMyAi/AskMyAi";
-import RecordANote from "@/components/RecordANote/RecordANote";
+import AskMyAi from "@/components/Dashboard/AskMyAi/AskMyAi";
+import RecordANote from "@/components/Dashboard/RecordANote/RecordANote";
 import { useRecoilState } from "recoil";
 import { recordANoteState } from "@/libs/atoms";
+import AddNew from "@/components/Dashboard/AddNew";
 
 const Autocomplete = styled(MantineAutocomplete)`
   input {
@@ -42,12 +43,7 @@ const Dashboard = () => {
             <Group gap={8} bg={"white"} px={14} py={8} className="rounded-2xl shadow-lg">
               <RecordANote />
               {!isRecording && <AskMyAi />}
-
-              {!isRecording && (
-                <Button radius={"lg"} variant="light" size="sm" fz={"md"} fw={500} rightSection={<IconPlus width={20} height={20} />}>
-                  Add New
-                </Button>
-              )}
+              {!isRecording && <AddNew />}
             </Group>
           </Box>
         </Box>
