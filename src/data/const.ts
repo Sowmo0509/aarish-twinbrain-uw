@@ -9,6 +9,8 @@ export const CONSTANTS = {
     LIGHT_GREY: "#666666",
     LIGHT_BLUE_GREY: "#E6EAF0",
     DARKEST_GREY: "#111111",
+    TEXT_DARK_GREY: "#4A4A4A",
+    TEXT_DARK_GREY_2: "#272729",
   },
 };
 
