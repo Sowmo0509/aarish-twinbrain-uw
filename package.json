@@ -13,10 +13,13 @@
     "@mantine/dates": "^7.12.2",
     "@mantine/form": "^7.12.2",
     "@mantine/hooks": "^7.12.2",
+    "@tabler/icons-react": "^3.16.0",
     "dayjs": "^1.11.13",
     "next": "14.2.10",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-media-recorder": "^1.7.1",
+    "styled-components": "^6.1.13"
   },
   "devDependencies": {
     "@types/node": "^20",

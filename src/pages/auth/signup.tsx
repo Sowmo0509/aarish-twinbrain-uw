@@ -1,6 +1,7 @@
 import SignupForm from "@/components/Form/SignupForm";
-import CONSTANTS from "@/data/const";
-import { Flex, Image, Title } from "@mantine/core";
+import { CONSTANTS, LINKS } from "@/data/const";
+import { Box, Flex, Image, Stack, Title } from "@mantine/core";
+import Link from "next/link";
 
 const Signup = () => {
   return (
@@ -11,9 +12,15 @@ const Signup = () => {
 
       <Flex flex={1} justify={"center"} align={"center"}>
         <Flex w={"56%"} mx={"auto"} direction={"column"} className="right">
-          <Title fw={500} mb={32}>
-            Create an account
-          </Title>
+          <Stack mb={32}>
+            <Title fw={500}>Create an account</Title>
+            <Box>
+              Already have an account?{" "}
+              <Link href={LINKS.AUTH.LOGIN} className="underline">
+                Log in
+              </Link>
+            </Box>
+          </Stack>
 
           <SignupForm />
         </Flex>

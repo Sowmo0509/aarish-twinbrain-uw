@@ -1,5 +1,5 @@
 import { Container, createTheme, rem, TextInputProps } from "@mantine/core";
-import CONSTANTS from "./data/const";
+import { CONSTANTS } from "./data/const";
 
 const CONTAINER_SIZES: Record<string, string> = {
   xxs: rem(300),
@@ -51,6 +51,26 @@ export const theme = createTheme({
     }),
 
     TextInput: {
+      styles: (theme: TextInputProps, params: TextInputProps) => ({
+        label: {
+          color: CONSTANTS.COLOR.LIGHT_GREY,
+          fontWeight: 400,
+          marginBottom: 8,
+        },
+        description: {
+          // marginTop: 12,
+          // marginLeft: 4,
+        },
+        input: {
+          fontSize: params.size === "sm" ? "12px" : params.size === "lg" ? "18px" : params.size === "xl" ? "16px" : "16px",
+          height: params.size === "sm" ? "35px" : params.size === "lg" ? "55px" : params.size === "xl" ? "320px" : "54px",
+          // paddingLeft: 18,
+          // paddingRight: 18,
+        },
+      }),
+    },
+
+    PasswordInput: {
       styles: (theme: TextInputProps, params: TextInputProps) => ({
         label: {
           color: CONSTANTS.COLOR.LIGHT_GREY,
