@@ -1,5 +1,5 @@
 import { CONSTANTS } from "@/data/const";
-import { AppShell, Box, Burger, Button, Group, Image, Skeleton, Stack } from "@mantine/core";
+import { AppShell, Box, Burger, Button, Flex, Group, Image, Skeleton, Stack } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { IconCategory2, IconRecordMail, IconShare, IconStarFilled } from "@tabler/icons-react";
 import { ReactNode, useState } from "react";

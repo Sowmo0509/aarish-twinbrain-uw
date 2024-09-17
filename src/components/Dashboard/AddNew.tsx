@@ -1,6 +1,10 @@
 import { Menu, Button, Text, rem } from "@mantine/core";
 import { IconSettings, IconSearch, IconPhoto, IconMessageCircle, IconTrash, IconArrowsLeftRight, IconPlus, IconNote, IconNotes, IconImageInPicture, IconPhotoScan, IconLink, IconFiles, IconBrandYoutube, IconDots } from "@tabler/icons-react";
+import { useRouter } from "next/router";
+
 const AddNew = () => {
+  const router = useRouter();
+
   return (
     <Menu offset={{ mainAxis: 16 }} shadow="md" width={200}>
       <Menu.Target>
@@ -11,7 +15,9 @@ const AddNew = () => {
 
       <Menu.Dropdown>
         {/* <Menu.Label>Application</Menu.Label> */}
-        <Menu.Item leftSection={<IconNotes style={{ width: rem(14), height: rem(14) }} />}>Notes</Menu.Item>
+        <Menu.Item onClick={() => router.push("/dashboard/notes")} leftSection={<IconNotes style={{ width: rem(14), height: rem(14) }} />}>
+          Notes
+        </Menu.Item>
         <Menu.Item leftSection={<IconPhotoScan style={{ width: rem(14), height: rem(14) }} />}>Image (GPT-4o)</Menu.Item>
         <Menu.Item leftSection={<IconLink style={{ width: rem(14), height: rem(14) }} />}>Links</Menu.Item>
         <Menu.Item leftSection={<IconFiles style={{ width: rem(14), height: rem(14) }} />}>Files</Menu.Item>
