@@ -1,3 +1,5 @@
+import { IconHome, IconStar, IconHeart, IconBookmark, IconCalendar, IconBell, IconCheck, IconFlag, IconGift, IconMessage, IconMusic, IconCamera, IconChartBar, IconGlobe, IconBriefcase, IconUser } from "@tabler/icons-react";
+
 export const CONSTANTS = {
   IMAGE: {
     AUTH_SIGNUP: "/images/auth_image.png",
@@ -31,4 +33,8 @@ export const CHIPS = {
     { title: "Links", key: "links" },
     { title: "Videos", key: "videos" },
   ],
+};
+
+export const ICONS = {
+  COLLECTION_ICONS: [IconHome, IconStar, IconHeart, IconBookmark, IconCalendar, IconBell, IconCheck, IconFlag, IconGift, IconMessage, IconMusic, IconCamera, IconChartBar, IconGlobe, IconBriefcase, IconUser],
 };
