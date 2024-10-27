@@ -1,8 +1,7 @@
 import DashboardLayout from "@/components/Layout/DashboardLayout";
 import { styled } from "styled-components";
-import { Autocomplete as MantineAutocomplete, Flex, rem, Chip, Group, Stack, Box, SimpleGrid } from "@mantine/core";
+import { Autocomplete as MantineAutocomplete, Flex, rem, Group, Stack, Box, SimpleGrid } from "@mantine/core";
 import { IconSearch } from "@tabler/icons-react";
-import { CHIPS } from "@/data/const";
 import AskMyAi from "@/components/Dashboard/AskMyAi/AskMyAi";
 import RecordANote from "@/components/Dashboard/RecordANote/RecordANote";
 import { useRecoilState } from "recoil";
@@ -10,6 +9,7 @@ import { recordANoteState } from "@/libs/atoms";
 import AddNew from "@/components/Dashboard/AddNew";
 import ChatResponseText from "@/components/Dashboard/Chat/ChatResponseText";
 import ChatResponseCard from "@/components/Dashboard/Chat/ChatResponseCard";
+import TypeChips from "@/components/Shared/TypeChips";
 
 const Autocomplete = styled(MantineAutocomplete)`
   input {
@@ -25,19 +25,11 @@ const Dashboard = () => {
 
   return (
     <DashboardLayout>
-      <Flex pos={"relative"} direction={"column"} justify={"center"} align={"center"}>
+      <Flex py={16} pos={"relative"} direction={"column"} justify={"center"} align={"center"}>
         {/* Search and Chips */}
         <Stack className="search-contents" align="start" w={"75%"}>
           <Autocomplete w={"100%"} size="lg" data={["React", "Angular", "Vue"]} leftSectionPointerEvents="none" leftSection={<IconSearch style={{ width: rem(16), height: rem(16) }} />} placeholder="Search" />
-          <Chip.Group multiple>
-            <Group justify="center" gap={8}>
-              {CHIPS.SEARCH_CHIPS.map((chip, i) => (
-                <Chip className="capitalize" key={i} size="sm" variant="outline" value={chip.key}>
-                  {chip.title}
-                </Chip>
-              ))}
-            </Group>
-          </Chip.Group>
+          <TypeChips />
         </Stack>
 
         {/* Chat Response */}

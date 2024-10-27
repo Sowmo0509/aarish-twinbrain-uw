@@ -1,7 +1,7 @@
 import { CONSTANTS } from "@/data/const";
-import { AppShell, Box, Burger, Button, Flex, Group, Image, Skeleton, Stack } from "@mantine/core";
+import { Accordion, AppShell, Box, Burger, Button, Flex, Group, Image, Skeleton, Stack, Text } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { IconCategory2, IconRecordMail, IconShare, IconStarFilled } from "@tabler/icons-react";
+import { IconCategory2, IconRecordMail, IconShare, IconStack2Filled, IconStarFilled, IconUsersGroup } from "@tabler/icons-react";
 import { ReactNode, useState } from "react";
 import UpgradeToPro from "../Shared/UpgradeToPro";
 import UserMenu from "../Shared/UserMenu";
@@ -14,6 +14,7 @@ export const SidebarItems = [
   { title: "Voice Notes", link: "voice-notes", icon: <IconRecordMail /> },
   { title: "All", link: "all", icon: <IconCategory2 /> },
   { title: "Shared", link: "shared", icon: <IconShare /> },
+  { title: "Collections", link: "collections", icon: <IconStack2Filled /> },
   { title: "Starred", link: "starred", icon: <IconStarFilled /> },
 ];
 
@@ -31,7 +32,7 @@ export default function DashboardLayout({ children }: LayoutProps) {
         collapsed: { mobile: !mobileOpened, desktop: !desktopOpened },
       }}
       padding="md">
-      <AppShell.Header bg={"transparent"} bd={"none"}>
+      <AppShell.Header bg={"white"} bd={"none"}>
         <Group h="100%" px="md">
           <Burger opened={mobileOpened} onClick={toggleMobile} hiddenFrom="sm" size="sm" />
           <Burger opened={desktopOpened} onClick={toggleDesktop} visibleFrom="sm" size="sm" />
@@ -59,6 +60,8 @@ export default function DashboardLayout({ children }: LayoutProps) {
                 {item.title}
               </Button>
             ))}
+            {TeamsMenu()}
+            {TagsMenu()}
           </Stack>
 
           <Box>
@@ -67,9 +70,57 @@ export default function DashboardLayout({ children }: LayoutProps) {
           </Box>
         </Stack>
       </AppShell.Navbar>
-      <AppShell.Main py={60} m={0} bg={CONSTANTS.COLOR.LIGHT_BLUE_GREY}>
+      <AppShell.Main className="flex flex-1 flex-col" py={60} m={0} bg={CONSTANTS.COLOR.LIGHT_BLUE_GREY}>
         {children}
       </AppShell.Main>
     </AppShell>
+  );
+}
+
+function TeamsMenu() {
+  return (
+    <Accordion variant="separated" defaultValue="">
+      <Accordion.Item value={"team-1"}>
+        <Accordion.Control c={"gray.6"} icon={<IconUsersGroup />}>
+          <Text fw={500} fz={"sm"}>
+            Teams
+          </Text>
+        </Accordion.Control>
+        <Accordion.Panel>
+          <Stack align="start">
+            <Button fz={"sm"} variant="transparent" leftSection={<IconUsersGroup />}>
+              Team 01
+            </Button>
+            <Button fz={"sm"} variant="transparent" leftSection={<IconUsersGroup />}>
+              Team 01
+            </Button>
+          </Stack>
+        </Accordion.Panel>
+      </Accordion.Item>
+    </Accordion>
+  );
+}
+
+function TagsMenu() {
+  return (
+    <Accordion variant="separated" defaultValue="">
+      <Accordion.Item value={"team-1"}>
+        <Accordion.Control c={"gray.6"} icon={<IconUsersGroup />}>
+          <Text fw={500} fz={"sm"}>
+            See all tags
+          </Text>
+        </Accordion.Control>
+        <Accordion.Panel>
+          <Stack align="start">
+            <Button fz={"sm"} variant="transparent" leftSection={<IconUsersGroup />}>
+              Team 01
+            </Button>
+            <Button fz={"sm"} variant="transparent" leftSection={<IconUsersGroup />}>
+              Team 01
+            </Button>
+          </Stack>
+        </Accordion.Panel>
+      </Accordion.Item>
+    </Accordion>
   );
 }
