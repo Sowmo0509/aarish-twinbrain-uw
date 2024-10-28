@@ -25,13 +25,13 @@ export const LINKS = {
 
 export const CHIPS = {
   SEARCH_CHIPS: [
-    { title: "all", key: "all" },
-    { title: "Voice Notes", key: "voice_notes" },
-    { title: "Notes", key: "notes" },
-    { title: "Images", key: "images" },
-    { title: "Documents", key: "documents" },
-    { title: "Links", key: "links" },
-    { title: "Videos", key: "videos" },
+    { title: "all", key: "/" },
+    { title: "Voice Notes", key: "/voice-notes" },
+    { title: "Notes", key: "/notes" },
+    { title: "Images", key: "/images" },
+    { title: "Documents", key: "/documents" },
+    { title: "Links", key: "/links" },
+    { title: "Videos", key: "/videos" },
   ],
 };
 

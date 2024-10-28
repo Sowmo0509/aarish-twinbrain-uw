@@ -9,7 +9,7 @@ const ChatResponseText = () => {
 
   return (
     <>
-      <Flex onClick={open} gap={rem(24)}>
+      <Flex onClick={open} gap={rem(24)} className="hover:bg-white hover:shadow-md cursor-pointer duration-300 transition-all rounded-xl p-4">
         <Box>
           <Box className="p-1 border-dashed border-black border-2 rounded-full">
             <IconPlayerPlayFilled className="w-5 h-5" />

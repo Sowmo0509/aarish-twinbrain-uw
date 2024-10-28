@@ -1,6 +1,40 @@
 import { Card, Image, rem, Text } from "@mantine/core";
 
-const ChatResponseCard = () => {
+interface ChatResponseCard {
+  type?: "voice_note" | "image" | "note" | "document" | "link" | "video";
+  title?: string;
+  date?: string;
+  filename?: string;
+  link?: string;
+}
+
+interface CardSubtitle {
+  type?: ChatResponseCard["type"];
+  date?: string;
+  filename?: string;
+  link?: string;
+}
+
+function CardSubtitleMaker({ type, date, filename, link }: CardSubtitle) {
+  switch (type) {
+    case "voice_note":
+      return `Voice Note: ${date}`;
+    case "note":
+      return `Note: ${date}`;
+    case "image":
+      return `Image: ${date}`;
+    case "document":
+      return `${filename}`;
+    case "link":
+      return `${link}`;
+    case "video":
+      return `${link}`;
+    default:
+      return `null`;
+  }
+}
+
+const ChatResponseCard = ({ type, date, title, filename, link }: ChatResponseCard) => {
   return (
     <Card shadow="sm" padding="md" component="a" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
       <Card.Section>
@@ -8,11 +42,11 @@ const ChatResponseCard = () => {
       </Card.Section>
 
       <Text fw={500} size="md" mt="md">
-        You&apos;ve won a million dollars in cash!
+        {title}
       </Text>
 
-      <Text mt="xs" c="dimmed" size="sm">
-        Please click anywhere on this card to claim your reward, this is not a fraud, trust us
+      <Text c="dimmed" size="sm">
+        {CardSubtitleMaker({ type, date, filename, link })}
       </Text>
     </Card>
   );

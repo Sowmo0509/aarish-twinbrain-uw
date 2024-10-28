@@ -1,27 +1,28 @@
 import { CONSTANTS } from "@/data/const";
-import { Accordion, AppShell, Box, Burger, Button, Flex, Group, Image, Skeleton, Stack, Text } from "@mantine/core";
+import { Accordion, AppShell, Box, Burger, Button, Group, Image, Stack, Text } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { IconCategory2, IconRecordMail, IconShare, IconStack2Filled, IconStarFilled, IconUsersGroup } from "@tabler/icons-react";
-import { ReactNode, useState } from "react";
+import { IconUsersGroup } from "@tabler/icons-react";
+import { ReactNode, useState, useEffect } from "react";
 import UpgradeToPro from "../Shared/UpgradeToPro";
 import UserMenu from "../Shared/UserMenu";
+import { SidebarItems } from "@/data/nav";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 interface LayoutProps {
   children: ReactNode;
 }
 
-export const SidebarItems = [
-  { title: "Voice Notes", link: "voice-notes", icon: <IconRecordMail /> },
-  { title: "All", link: "all", icon: <IconCategory2 /> },
-  { title: "Shared", link: "shared", icon: <IconShare /> },
-  { title: "Collections", link: "collections", icon: <IconStack2Filled /> },
-  { title: "Starred", link: "starred", icon: <IconStarFilled /> },
-];
-
 export default function DashboardLayout({ children }: LayoutProps) {
-  const [selectedItem, setSelectedItem] = useState("");
+  const router = useRouter();
+
+  // LEFT NAVBAR
   const [mobileOpened, { toggle: toggleMobile }] = useDisclosure();
   const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(true);
+
+  // RIGHT ASIDE
+  const [mobileAsideOpened, { toggle: toggleMobileAside }] = useDisclosure();
+  const [desktopAsideOpened, { toggle: toggleDesktopAside }] = useDisclosure(true);
 
   return (
     <AppShell
@@ -31,6 +32,7 @@ export default function DashboardLayout({ children }: LayoutProps) {
         breakpoint: "sm",
         collapsed: { mobile: !mobileOpened, desktop: !desktopOpened },
       }}
+      aside={{ width: 260, breakpoint: "sm", collapsed: { mobile: !mobileAsideOpened, desktop: !desktopAsideOpened } }}
       padding="md">
       <AppShell.Header bg={"white"} bd={"none"}>
         <Group h="100%" px="md">
@@ -43,22 +45,23 @@ export default function DashboardLayout({ children }: LayoutProps) {
         <Stack justify="space-between" h={"100%"}>
           <Stack gap={8}>
             {SidebarItems.map((item, i) => (
-              <Button
-                styles={() => ({
-                  label: { marginLeft: 8 },
-                })}
-                onClick={() => setSelectedItem(item.link)}
-                c={selectedItem == item.link ? "black" : "gray.6"}
-                size="md"
-                fz={"sm"}
-                key={i}
-                fw={500}
-                justify="start"
-                fullWidth
-                leftSection={item.icon}
-                variant={selectedItem == item.link ? "light" : "transparent"}>
-                {item.title}
-              </Button>
+              <Link key={i} href={item.link} passHref>
+                <Button
+                  styles={() => ({
+                    label: { marginLeft: 8 },
+                  })}
+                  color={"/" + router.pathname.split("/")[1] === item.link ? "black" : "gray.6"}
+                  size="md"
+                  fz={"sm"}
+                  fw={500}
+                  justify="start"
+                  fullWidth
+                  leftSection={<item.icon />}
+                  variant={"/" + router.pathname.split("/")[1] === item.link ? "light" : "transparent"} // Update variant based on selectedItem
+                >
+                  {item.title}
+                </Button>
+              </Link>
             ))}
             {TeamsMenu()}
             {TagsMenu()}
@@ -73,6 +76,7 @@ export default function DashboardLayout({ children }: LayoutProps) {
       <AppShell.Main className="flex flex-1 flex-col" py={60} m={0} bg={CONSTANTS.COLOR.LIGHT_BLUE_GREY}>
         {children}
       </AppShell.Main>
+      <AppShell.Aside p="md">Team Member \\ Not Practical for Mobile \\ Updates Here</AppShell.Aside>
     </AppShell>
   );
 }
@@ -81,7 +85,7 @@ function TeamsMenu() {
   return (
     <Accordion variant="separated" defaultValue="">
       <Accordion.Item value={"team-1"}>
-        <Accordion.Control c={"gray.6"} icon={<IconUsersGroup />}>
+        <Accordion.Control color={"gray.6"} icon={<IconUsersGroup />}>
           <Text fw={500} fz={"sm"}>
             Teams
           </Text>
@@ -92,7 +96,7 @@ function TeamsMenu() {
               Team 01
             </Button>
             <Button fz={"sm"} variant="transparent" leftSection={<IconUsersGroup />}>
-              Team 01
+              Team 02
             </Button>
           </Stack>
         </Accordion.Panel>
@@ -104,8 +108,8 @@ function TeamsMenu() {
 function TagsMenu() {
   return (
     <Accordion variant="separated" defaultValue="">
-      <Accordion.Item value={"team-1"}>
-        <Accordion.Control c={"gray.6"} icon={<IconUsersGroup />}>
+      <Accordion.Item value={"tags-1"}>
+        <Accordion.Control color={"gray.6"} icon={<IconUsersGroup />}>
           <Text fw={500} fz={"sm"}>
             See all tags
           </Text>
@@ -113,10 +117,10 @@ function TagsMenu() {
         <Accordion.Panel>
           <Stack align="start">
             <Button fz={"sm"} variant="transparent" leftSection={<IconUsersGroup />}>
-              Team 01
+              Tag 01
             </Button>
             <Button fz={"sm"} variant="transparent" leftSection={<IconUsersGroup />}>
-              Team 01
+              Tag 02
             </Button>
           </Stack>
         </Accordion.Panel>
